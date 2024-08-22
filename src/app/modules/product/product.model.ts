@@ -37,6 +37,6 @@ export const Product = model<TProduct, ProductModel>("Product", productSchema);
 
 
 // Sync indexes to ensure the unique constraint is applied
-Product.syncIndexes()
-    .then(() => console.log("Indexes synced"))
-    .catch(err => console.error("Error syncing indexes:", err));
+// Product.syncIndexes()
+//     .then(() => console.log("Indexes synced"))
+//     .catch(err => console.error("Error syncing indexes:", err));
