@@ -1,5 +1,5 @@
 import { Schema, model, connect } from 'mongoose';
-import TProduct, { TInventory, TVariant } from './product.interface';
+import TProduct, { ProductModel, TInventory, TProductMethods, TVariant } from './product.interface';
 
 
 const variantSchema = new Schema<TVariant>({
@@ -13,7 +13,7 @@ const inventorySchema = new Schema<TInventory>({
 })
 
 //product schema 
-const productSchema = new Schema<TProduct>({
+const productSchema = new Schema<TProduct, ProductModel, TProductMethods>({
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
@@ -26,11 +26,17 @@ const productSchema = new Schema<TProduct>({
 });
 
 
+// using static method to check if product already exists
+productSchema.methods.doesProductExist = async function(name: string) {
+    const existingProduct = Product.findOne({name: name});
+    return existingProduct;
+}
+
 // creating a product model 
-export const ProductModel = model<TProduct>("Product", productSchema);
+export const Product = model<TProduct, ProductModel>("Product", productSchema);
 
 
 // Sync indexes to ensure the unique constraint is applied
-ProductModel.syncIndexes()
+Product.syncIndexes()
     .then(() => console.log("Indexes synced"))
     .catch(err => console.error("Error syncing indexes:", err));

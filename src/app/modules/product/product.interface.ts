@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+import { Schema, model, connect, Model } from 'mongoose';
 
 export type TVariant = {
     type: string;
@@ -23,3 +23,9 @@ type TProduct = {
   }
 
   export default TProduct;
+// creating static methods
+  export type TProductMethods = {
+    doesProductExist(name: string) : Promise<TProduct | null>
+  }
+
+  export type ProductModel = Model<TProduct, {}, TProductMethods>;
