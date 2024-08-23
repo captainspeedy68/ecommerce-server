@@ -18,10 +18,11 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       success: false,
       message: 'Product creation failed!!!!',
+      err,
     });
   }
 };
@@ -29,48 +30,47 @@ const getAllProducts = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.searchTerm || '';
     if (searchTerm) {
-      const result = await ProductServices.getAProductFromQuery(searchTerm as string);
+      const result = await ProductServices.getAProductFromQuery(
+        searchTerm as string,
+      );
       res.status(200).json({
         success: true,
         message: `Product with the term ${searchTerm} retrieved successfully`,
         data: result,
       });
-    }
-    else{
+    } else {
       const result = await ProductServices.getAllProductsFromDB();
-    console.log(result);
-    res.status(200).json({
-      success: true,
-      message: 'Product retrieved successfully',
-      data: result,
-    });
+      // console.log(result);
+      res.status(200).json({
+        success: true,
+        message: 'Product retrieved successfully',
+        data: result,
+      });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       success: false,
       message: 'Products failed get!!!!',
+      err,
     });
   }
 };
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
-     
-      const id = req.params.productId;
-      const result = await ProductServices.getSingleProductFromDB(id);
-      res.status(200).json({
-        success: true,
-        message: 'Product is retrieved successfully',
-        data: result,
-      });
-    
-
-    
+    const id = req.params.productId;
+    const result = await ProductServices.getSingleProductFromDB(id);
+    res.status(200).json({
+      success: true,
+      message: 'Product is retrieved successfully',
+      data: result,
+    });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({
       success: false,
       message: 'Products failed get!!!!',
+      err,
     });
   }
 };
@@ -78,7 +78,7 @@ const updateAProduct = async (req: Request, res: Response) => {
   try {
     const updateData = req.body;
     const productId = req.params.productId;
-    console.log(updateData, productId);
+    // console.log(updateData, productId);
     if (!ObjectId.isValid(productId)) {
       return res.status(400).json({
         success: false,
@@ -89,7 +89,7 @@ const updateAProduct = async (req: Request, res: Response) => {
       updateData,
       productId,
     );
-    console.log(result);
+    // console.log(result);
     if (result.matchedCount === 0) {
       throw new Error('Product not found');
     }
@@ -106,6 +106,7 @@ const updateAProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Products failed to update!!!!',
+      err,
     });
   }
 };
@@ -123,6 +124,7 @@ const deleteAProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Products failed to be delete!!!!',
+      err,
     });
   }
 };

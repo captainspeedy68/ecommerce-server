@@ -32,6 +32,7 @@ export default [
       globals: {
         ...globals.browser,
         myCustomGlobal: "readonly",
+        process: 'readonly',
       },
 
       parser: tsParser,
