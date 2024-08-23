@@ -26,6 +26,14 @@ const productSchema = new Schema<TProduct, ProductModel, TProductMethods>({
 });
 
 
+productSchema.pre("save", function(){
+    console.log(this, "pre");
+})
+productSchema.post("save", function(){
+    console.log(this, "post hook, after saving the data");
+})
+
+
 // using static method to check if product already exists
 productSchema.methods.doesProductExist = async function(name: string) {
     const existingProduct = Product.findOne({name: name});
