@@ -31,17 +31,14 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
+        myCustomGlobal: "readonly",
       },
 
       parser: tsParser,
       ecmaVersion: 12,
       sourceType: 'module',
     },
-    extends: [
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      
-    ],
+   
 
     rules: {
       '@typescript-eslint/no-unused-vars': 'error',
@@ -50,8 +47,6 @@ export default [
       'no-console': 'warn',
       'no-undef': 'error',
     },
-    globals: {
-      process: 'readonly',
-    },
+    
   },
 ];
