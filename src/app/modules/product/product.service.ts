@@ -20,6 +20,11 @@ const getSingleProductFromDB = async (id: string ) =>{
     return result
 };
 
+const getAProductFromQuery = async(searchTerm: string) => {
+    const result = await Product.find({name: {$regex: searchTerm, $options: "i"}});
+    return result;
+}
+
 const updateAProductFromDB = async(product: TProduct, id: string) => {
     
     const result = await Product.updateOne({_id: new ObjectId(id)}, {$set: { ...product }});
@@ -35,6 +40,7 @@ export const ProductServices = {
     createProductIntoDB,
     getAllProductsFromDB,
     getSingleProductFromDB,
+    getAProductFromQuery,
     updateAProductFromDB,
     deleteProductFromDB
 }
