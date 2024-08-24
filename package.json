@@ -10,7 +10,7 @@
     "lint": "eslint src",
     "fix": "eslint --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "build": "tsc",
+    "build": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
