@@ -13,6 +13,14 @@ app.use(cors());
 app.use('/api/products', ProductRoute);
 app.use('/api/orders', OrderRoutes);
 
+// erro handling
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
+
 app.get('/', (req: Request, res: Response) => {
   const a: string = 'hellow';
   res.send(a);

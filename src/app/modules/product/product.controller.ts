@@ -43,7 +43,7 @@ const getAllProducts = async (req: Request, res: Response) => {
       // console.log(result);
       res.status(200).json({
         success: true,
-        message: 'Product retrieved successfully',
+        message: 'Products fetched successfully!',
         data: result,
       });
     }
@@ -62,7 +62,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     const result = await ProductServices.getSingleProductFromDB(id);
     res.status(200).json({
       success: true,
-      message: 'Product is retrieved successfully',
+      message: 'Product fetched successfully!',
       data: result,
     });
   } catch (err) {
@@ -99,7 +99,7 @@ const updateAProduct = async (req: Request, res: Response) => {
     }
     res.status(200).json({
       success: true,
-      message: 'Product is updated successfully',
+      message: 'Product updated successfully!',
       data: result,
     });
   } catch (err) {
@@ -117,7 +117,7 @@ const deleteAProduct = async (req: Request, res: Response) => {
     const result = await ProductServices.deleteProductFromDB(productId);
     res.status(200).json({
       success: true,
-      message: 'Product is deleted successfully',
+      message: 'Product deleted successfully!',
       data: result,
     });
   } catch (err) {

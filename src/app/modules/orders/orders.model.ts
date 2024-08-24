@@ -11,10 +11,9 @@ const orderSchema = new Schema<TOrder, OrderModel, TOrderMethods>({
   quantity: { type: Number, required: true },
 });
 
-orderSchema.methods.isOrderAvailable = async function (id: string) {
+orderSchema.methods.doesProductExist = async function (id: string) {
   const existingProduct = await Product.findOne(
     { _id: new ObjectId(id) },
-    { 'inventory.inStock': true },
   );
   return existingProduct;
 };

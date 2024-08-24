@@ -9,7 +9,7 @@ export type TOrder = {
 };
 
 export type TOrderMethods = {
-  isOrderAvailable(id: string): Promise<TProduct | null>;
+  doesProductExist(id: string): Promise<TProduct | null>;
 };
 
 export type OrderModel = Model<TOrder, Record<string, never>, TOrderMethods>;

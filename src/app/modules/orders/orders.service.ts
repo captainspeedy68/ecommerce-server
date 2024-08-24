@@ -18,8 +18,14 @@ const getSingleOrderFromDB = async (email: string) => {
   return result;
 };
 
-const availableInDB = async (id: string, quantity: number) => {
-  const existingProduct = await Product.findOne({
+const availableInDB = async (order: TOrder) => {
+  const orderInstance = new Order(order);
+  if (!(await orderInstance.doesProductExist(order.productId))){
+    throw new Error("Order not found");
+  }
+  const id = order.productId;
+  const quantity = order.quantity;
+  const availableProduct = await Product.findOne({
     _id: new ObjectId(id),
     $or: [
       { 'inventory.quantity': { $gt: quantity } },
@@ -27,7 +33,8 @@ const availableInDB = async (id: string, quantity: number) => {
     ],
   });
 
-  return existingProduct;
+
+  return availableProduct;
 };
 
 const reduceQuantityFromDB = async (id: string, quantity: number) => {
