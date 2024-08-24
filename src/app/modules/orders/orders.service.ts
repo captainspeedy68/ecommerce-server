@@ -20,8 +20,8 @@ const getSingleOrderFromDB = async (email: string) => {
 
 const availableInDB = async (order: TOrder) => {
   const orderInstance = new Order(order);
-  if (!(await orderInstance.doesProductExist(order.productId))){
-    throw new Error("Order not found");
+  if (!(await orderInstance.doesProductExist(order.productId))) {
+    throw new Error('Order not found');
   }
   const id = order.productId;
   const quantity = order.quantity;
@@ -32,7 +32,6 @@ const availableInDB = async (order: TOrder) => {
       { 'inventory.quantity': { $eq: quantity } },
     ],
   });
-
 
   return availableProduct;
 };

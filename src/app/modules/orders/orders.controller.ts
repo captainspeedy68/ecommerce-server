@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 // import productValidationSchema from "../product/product.validation";
 import { orderValidationSchema } from './orders.validation';
 import { OrderServices } from './orders.service';
-import { Order } from './orders.model';
 
 const createOrder = async (req: Request, res: Response) => {
   try {

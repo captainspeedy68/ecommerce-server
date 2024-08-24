@@ -12,9 +12,7 @@ const orderSchema = new Schema<TOrder, OrderModel, TOrderMethods>({
 });
 
 orderSchema.methods.doesProductExist = async function (id: string) {
-  const existingProduct = await Product.findOne(
-    { _id: new ObjectId(id) },
-  );
+  const existingProduct = await Product.findOne({ _id: new ObjectId(id) });
   return existingProduct;
 };
 
