@@ -10,36 +10,44 @@ const createOrderInDB = async (order: TOrder) => {
 };
 
 const getAllOrdersFromDB = async () => {
-    const result = await Order.find();
-    return result;
-}
+  const result = await Order.find();
+  return result;
+};
 const getSingleOrderFromDB = async (email: string) => {
-    const result = await Order.find({email: email});
-    return result;
-}
+  const result = await Order.find({ email: email });
+  return result;
+};
 
-const availableInDB = async(id: string, quantity: number) => {
-  const existingProduct = await Product.findOne({_id: new ObjectId(id), $or: [
-    { "inventory.quantity": { $gt: quantity } },
-    { "inventory.quantity": { $eq: quantity } }
-  ]});
-  
+const availableInDB = async (id: string, quantity: number) => {
+  const existingProduct = await Product.findOne({
+    _id: new ObjectId(id),
+    $or: [
+      { 'inventory.quantity': { $gt: quantity } },
+      { 'inventory.quantity': { $eq: quantity } },
+    ],
+  });
+
   return existingProduct;
+};
 
-}
-
-const reduceQuantityFromDB = async(id: string, quantity: number) => {
-  await Product.updateOne({_id: new ObjectId(id)}, {$inc: {"inventory.quantity": -quantity}});
+const reduceQuantityFromDB = async (id: string, quantity: number) => {
+  await Product.updateOne(
+    { _id: new ObjectId(id) },
+    { $inc: { 'inventory.quantity': -quantity } },
+  );
 
   // set instock to false if quantity is zero
-  await Product.updateOne({_id: new ObjectId(id), "inventory.quantity": {$lte: 0}}, {"inventory.inStock": false})
+  await Product.updateOne(
+    { _id: new ObjectId(id), 'inventory.quantity': { $lte: 0 } },
+    { 'inventory.inStock': false },
+  );
   // return result;
-}
+};
 
 export const OrderServices = {
   createOrderInDB,
   getAllOrdersFromDB,
   getSingleOrderFromDB,
   availableInDB,
-  reduceQuantityFromDB
+  reduceQuantityFromDB,
 };

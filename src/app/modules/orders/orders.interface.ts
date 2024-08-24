@@ -1,5 +1,5 @@
-import { Model } from "mongoose";
-import TProduct from "../product/product.interface";
+import { Model } from 'mongoose';
+import TProduct from '../product/product.interface';
 
 export type TOrder = {
   email: string;
@@ -9,9 +9,7 @@ export type TOrder = {
 };
 
 export type TOrderMethods = {
-  isOrderAvailable(id: string): Promise<TProduct | null>
-}
+  isOrderAvailable(id: string): Promise<TProduct | null>;
+};
 
-export type OrderModel = Model<TOrder,
-Record<string, never>,
-TOrderMethods>
+export type OrderModel = Model<TOrder, Record<string, never>, TOrderMethods>;

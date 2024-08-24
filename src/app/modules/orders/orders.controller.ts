@@ -3,24 +3,20 @@ import { Request, Response } from 'express';
 import { orderValidationSchema } from './orders.validation';
 import { OrderServices } from './orders.service';
 
-
-
 const createOrder = async (req: Request, res: Response) => {
   try {
-    
     const order = req.body;
     const zodParseData = orderValidationSchema.parse(order);
 
-    
     const isAvailable = await OrderServices.availableInDB(
       order.productId,
       order.quantity,
     );
-    
+
     if (isAvailable) {
       // reducing quantity and change instock info if needed
-      await OrderServices.reduceQuantityFromDB(order.productId,order.quantity);
-      
+      await OrderServices.reduceQuantityFromDB(order.productId, order.quantity);
+
       const result = await OrderServices.createOrderInDB(zodParseData);
       res.status(200).json({
         success: true,
@@ -63,7 +59,7 @@ const getOrders = async (req: Request, res: Response) => {
     res.status(400).json({
       success: false,
       message: 'Could not retrieve order',
-      err
+      err,
     });
   }
 };
