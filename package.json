@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start:prod": "node ./dist/server.js",
-    "start": "node ./dist/server.js",
+    "start": "node /dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint": "eslint src",
     "fix": "eslint --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "build": "node ./dist/server.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
