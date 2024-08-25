@@ -11,10 +11,5 @@
       "src": "/(.*)",
       "dest": "dist.server.js"
     }
-  ],
-  "projectSettings": {
-    "framework": null, 
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist"
-  }
+  ]
 }
