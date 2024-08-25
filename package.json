@@ -2,7 +2,12 @@
   "name": "batch-3-assignment-2",
   "version": "1.0.0",
   "description": "**Objective:** Develop a Express application with TypeScript as the programming language, integrating MongoDB with Mongoose for effective data management. Ensure data integrity through validation using Joi/Zod.",
-  "main": "index.js",
+  "main": "dist/server.js",
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "scripts": {
     "start:prod": "node ./dist/server.js",
     "start": "node ./dist/server.js",
@@ -11,6 +16,8 @@
     "fix": "eslint --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
     "build": "tsc",
+    "add-build": "git add dist",
+    "ts.check": "tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -34,6 +41,7 @@
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.9.0",
+    "husky": "^9.1.5",
     "prettier": "^3.3.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4",
