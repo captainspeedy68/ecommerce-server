@@ -5,8 +5,7 @@
   "main": "index.js",
   "pre-commit": [
     "ts.check",
-    "build",
-    "add-build"
+    "build"
   ],
   "scripts": {
     "start:prod": "node /dist/server.js",
@@ -16,7 +15,6 @@
     "fix": "eslint --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
     "build": "tsc",
-    "add-build": "git add dist",
     "ts.check": "tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
